@@ -1,4 +1,4 @@
-# Library Rest API 
+# Express Js Rest API Boiler Plate 
 #### Build with 
 <p align="center">
   <a href="https://nodejs.org/">
