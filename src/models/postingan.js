@@ -66,4 +66,17 @@ module.exports = {
             })
         })
     },
+
+//////// Search Postingan ////////////////////////////
+    searchPostingan: (key) => {
+        return new Promise((resolve, reject) => {
+            conn.query('SELECT * FROM postingan WHERE post_name LIKE "%"?"%" OR image LIKE "%" ? "%" ',[key,key], (err, result) => {
+                if (!err) { 
+                    resolve(result)
+                } else {
+                    reject(new Error(err))
+                }
+            })
+        })
+    },
 }

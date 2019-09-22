@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads/')
     },
     filename: function (req, file, cb) {
+        // cb(null, new Date().toISOString() + file.originalname);
         cb(null, new Date().toISOString() + file.originalname);
     }
 })
@@ -20,9 +21,11 @@ const upload = multer({ storage: storage })
 
 Routes
     .get    ('/',                                        controlPost.ControllerGetPost)
-    .get    ('/ByID',                               controlPost.ControllerGetPostById ) // using QUERY as identifier
+    .get    ('/byID',                               controlPost.ControllerGetPostById ) // using QUERY as identifier
+    .get    ('/search',                               controlPost.ControllerSearchPost ) // using QUERY as identifier
     .post   ('/',   upload.single('image'),controlPost.ControllerCreatePostingan )
     .patch  ('/edit',       upload.single('image'),controlPost.ControllerEditPost) // using QUERY as identifier
     .delete ('/delete/:idUntukDelete',                   controlPost.ControllerDeletePost) // using PARAM as identifier 
+    //.delete ('/delete/',                   controlPost.ControllerDeletePost) // using PARAM as identifier 
 
 module.exports = Routes

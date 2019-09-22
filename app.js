@@ -28,5 +28,5 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 //router
 
-app.use('/post', postRoute)
+app.use('/postingan', postRoute)
 app.use('/note', noteRoute)
