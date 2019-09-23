@@ -30,7 +30,7 @@ module.exports = {
             totalPage = result.length
         })
 
-        offset     =    2
+        offset     = parseInt(req.query.page)
         activePage = parseInt(req.query.page)
         firstData  = (offset * activePage) - offset 
         jumlahHalaman =  Math.ceil(totalPage / offset)
