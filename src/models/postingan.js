@@ -2,9 +2,22 @@ const conn = require('../configs/db')
 
 module.exports = {
 ////////GET ALL Postingan ////////////////////////////
-    getAllPostingan: () => {
+    getAll: () => {
         return new Promise((resolve, reject) => {
-            conn.query('SELECT * FROM postingan', (err, result) => {
+            conn.query('SELECT * FROM postingan ', (err, result) => {
+                if (!err) { resolve(result)} 
+                else { reject( new Error(err) ) }
+            })
+        })
+    },
+   ////////GET ALL Postingan di pagination ////////////////////////////
+  
+    getAllPostingan: (limit,offset) => {
+    //    let limit = 0
+    //    let offset = 5
+
+        return new Promise((resolve, reject) => {
+            conn.query('SELECT * FROM postingan LIMIT ? ,? ', [limit,offset], (err, result) => {
                 if (!err) {
                     resolve(result)
                 } else {
@@ -12,7 +25,7 @@ module.exports = {
                 }
             })
         })
-    },
+    }, 
 ////////GET 1 Postingan ////////////////////////////
 
     getPostinganByid: (idnya) => {
