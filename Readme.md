@@ -17,12 +17,15 @@
   a Backend BoilerPlate using Express.Js 
 
 ## Features
-* users can get book data 
-* users can insert book data and upload photo 
-* users can access their inserted book data and uploaded photo 
-* users can see their history activity when borrowed book 
-* you can only see data in JSON except for uploaded photo,you can see image instead
-
+### what can this boilerplate do ?
+* CRUD basic
+* CRUD image (integrated with cloudinary)
+* Double Querry call
+* Double Model
+* pagination 
+* Authorization 
+* Authentication
+* Sorting
 
 ## Requirements
 * [`npm`](https://www.npmjs.com/get-npm)
@@ -51,7 +54,7 @@
  
 6. To see the example result in postman ,just click this button then import to your postman
 
-    [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0d2f608ea7421933adc9)
+    [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/084380c65d08aaed839f)
 
 
 

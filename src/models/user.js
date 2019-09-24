@@ -81,13 +81,13 @@ module.exports = {
         konaksi.query(`UPDATE history SET ? WHERE id =?`, [data, idnya], (err, result) => {
 
           konaksi.query(`UPDATE library SET status_pinjam	= '0' WHERE id =?`, id_buku, (err, result) => {
-            if (!err) {
-                resolve(result)
-            } else {
-                reject(new Error(err))
-            }
+            if (!err) { resolve(result) } 
+            else { reject(new Error(err)) }
           })
-            
+
+          if (!err) { resolve(result)} 
+          else { reject(new Error(err)) }
+          
         })
     })
   }

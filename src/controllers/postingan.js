@@ -23,21 +23,24 @@ module.exports = {
 
 ////// GET  post paginate ///////////////////////////////////////
     ControllerGetPost:async (req, res) => {
-        let totalPage,jumlahHalaman,limit,offset,activePage,firstData
+        let totalPage,jumlahHalaman,offset,activePage,firstData
         
         await postinganModel.getAll()
         .then((result)=>{
             totalPage = result.length
-        })
+        })      
 
+        orderBy    = req.query.orderBy
+        sort       = req.query.sortBy
         offset     = parseInt(req.query.data)
         activePage = parseInt(req.query.page)
+
         firstData  = (offset * activePage) - offset 
         jumlahHalaman =  Math.ceil(totalPage / offset)
 
-        await  postinganModel.getAllPostingan(firstData,offset,activePage)
+        await  postinganModel.getAllPostingan(firstData,offset,orderBy,sort)
             .then((resultData) => {
-                console.log('jml hal', jumlahHalaman)
+                console.log('jml hal', orderBy)
                 miscHelpers.response(res, resultData, 200)
             })
             .catch((error) => {

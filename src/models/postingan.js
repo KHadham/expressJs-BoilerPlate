@@ -12,19 +12,30 @@ module.exports = {
     },
    ////////GET ALL Postingan di pagination ////////////////////////////
   
-    getAllPostingan: (limit,offset) => {
-    //    let limit = 0
-    //    let offset = 5
-
-        return new Promise((resolve, reject) => {
-            conn.query('SELECT * FROM postingan LIMIT ? ,? ', [limit,offset], (err, result) => {
-                if (!err) {
-                    resolve(result)
-                } else {
-                    reject(new Error(err))
-                }
+    getAllPostingan: (limit,offset,orderby,sort) => {
+      
+        if (sort == 'desc') {
+            return new Promise((resolve, reject) => {
+                conn.query(`SELECT * FROM postingan  ORDER BY  ${orderby} desc LIMIT ? ,?`, [limit,offset], (err, result) => {
+                    if (!err) {
+                        resolve(result)
+                    } else {
+                        reject(new Error(err))
+                    }
+                })
             })
-        })
+        } else {
+            return new Promise((resolve, reject) => {
+                conn.query(`SELECT * FROM postingan  ORDER BY ${orderby} asc LIMIT ? ,?`, [limit,offset], (err, result) => {
+                    if (!err) {
+                        resolve(result)
+                    } else {
+                        reject(new Error(err))
+                    }
+                })
+            })
+        }
+        
     }, 
 ////////GET 1 Postingan ////////////////////////////
 
@@ -83,7 +94,7 @@ module.exports = {
 //////// Search Postingan ////////////////////////////
     searchPostingan: (key) => {
         return new Promise((resolve, reject) => {
-            conn.query('SELECT * FROM postingan WHERE post_name LIKE "%"?"%" OR image LIKE "%" ? "%" ',[key,key], (err, result) => {
+            conn.query('SELECT * FROM postingan WHERE post_name LIKE "%"?"%" OR image_name LIKE "%" ? "%" ',[key,key], (err, result) => {
                 if (!err) { 
                     resolve(result)
                 } else {

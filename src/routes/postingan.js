@@ -18,10 +18,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 Routes
-    .get    ('/getAll',                                        controlPost.getAll)
+    .get    ('/getAll',                                       controlPost.getAll )
     .get    ('/',                                  controlPost.ControllerGetPost )
     .get    ('/byID',                          controlPost.ControllerGetPostById ) // using QUERY as identifier
     .get    ('/search',                         controlPost.ControllerSearchPost ) // using QUERY as identifier
+                            //image and image_url is based on client form
     .post   ('/',   upload.single('image'),controlPost.ControllerCreatePostingan )
     .patch  ('/edit',  upload.single('image_url'),controlPost.ControllerEditPost ) // using QUERY as identifier
     .delete ('/delete/:idUntukDelete',          controlPost.ControllerDeletePost ) // using PARAM as identifier 
