@@ -37,11 +37,10 @@ module.exports = {
 
     const data = {
       username: req.body.username,
-      role:req.body.role,
-      email: req.body.email,
       password: passwordHash.passwordHash,
+      email: req.body.email,
       salt: passwordHash.salt,
-      token: 'Test',
+      token: '',
     }
     
     userModels.register(data)
@@ -83,19 +82,18 @@ logout : (req, res) => {
 
   userModels.signout( idnya)
   .then(() => {
-      MiscHelper.response(res, "logout", 200,idnya)
+      MiscHelper.response(res, "logout success", 200,idnya)
   })
   .catch((err) => {
       console.log(err)
   })
 },
 
-/////login//////////////////////////////
+/////login////////////////////////////// double model example
   login: (req, res) => {
-    const email = req.body.email
+    const email = req.body.username
     const password = req.body.password
-console.log('email', email)
-console.log('password', password)
+
     userModels.getByEmail(email)
       .then((result) => {
         const dataUser = result[0]

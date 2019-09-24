@@ -30,8 +30,8 @@ module.exports = {
             if (err && err.name === 'TokenExpiredError') return miscHelper.response(res, null, 401, 'Token Expired!')
 
             if (err && err.name === 'JsonWebTokenError') return miscHelper.response(res, null, 401, 'Invalid Token')
-
-            if (parseInt(userToken) !== parseInt(decoded.id_player)) return miscHelper.response(res, null, 401, 'Invalid User Token!')
+                                            // watch this id_user
+            if (parseInt(userToken) !== parseInt(decoded.id_user)) return miscHelper.response(res, null, 401, 'Invalid User Token!')
             console.log(decoded)
             next()
         })

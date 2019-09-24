@@ -4,7 +4,7 @@ module.exports = {
   //read all
   getUsers: (result) => { 
     return new Promise((resolve, reject) => {
-        conn.query(`SELECT * FROM user `, (err, result) => {
+        conn.query(`SELECT * FROM auth `, (err, result) => {
             if(!err){
                 resolve(result)
             }else{
@@ -15,7 +15,7 @@ module.exports = {
 },
   updateToken: (email, token) => {
     return new Promise((resolve, reject) => {
-        conn.query('UPDATE user SET token = ? WHERE email = ?', [token, email], (err, result) => {
+        conn.query('UPDATE auth SET token = ? WHERE username = ?', [token, email], (err, result) => {
             if (!err) {
                 resolve(result)
             } else {
@@ -27,7 +27,7 @@ module.exports = {
   
   userDetail: (userid) => {
     return new Promise((resolve, reject) => {
-      conn.query('SELECT user.* ,history.* from user left join history on user.id_user = history.id_kasir where user.id_user = ?'
+      conn.query('SELECT auth WHERE id_user = ?'
       , userid, (err, result) => {
         if (!err) {
           resolve(result)
@@ -40,7 +40,7 @@ module.exports = {
 
   register: (data) => {
     return new Promise((resolve, reject) => {
-      conn.query('INSERT INTO user SET ?', data, (err, result) => {
+      conn.query('INSERT INTO auth SET ?', data, (err, result) => {
         if (!err) {
           resolve(result)
         } else {
@@ -53,7 +53,7 @@ module.exports = {
 //logout
  signout: (idlogout) => {
   return new Promise((resolve, reject) => {
-    conn.query('UPDATE user SET token = "" WHERE id_user = ?', idlogout, (err, result) => {
+    conn.query('UPDATE auth SET token = "" WHERE id_user = ?', idlogout, (err, result) => {
       if (!err) {
         resolve(result)
       } else {
@@ -66,7 +66,7 @@ module.exports = {
 //login
   getByEmail: (email) => {
     return new Promise((resolve, reject) => {
-      conn.query('SELECT * FROM user WHERE email = ?', email, (err, result) => {
+      conn.query('SELECT * FROM auth WHERE username = ?', email, (err, result) => {
         if (!err) {
           resolve(result)
         } else {
@@ -75,5 +75,20 @@ module.exports = {
       })
     })
   },
+///////////// DoubleQuerryExample ///////////////////////////////////////////////////  
+  DoubleQuerryExample: (data, idnya, id_buku) => {
+    return new Promise((resolve, reject) => {
+        konaksi.query(`UPDATE history SET ? WHERE id =?`, [data, idnya], (err, result) => {
 
+          konaksi.query(`UPDATE library SET status_pinjam	= '0' WHERE id =?`, id_buku, (err, result) => {
+            if (!err) {
+                resolve(result)
+            } else {
+                reject(new Error(err))
+            }
+          })
+            
+        })
+    })
+  }
 }

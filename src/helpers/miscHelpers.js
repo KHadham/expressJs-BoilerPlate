@@ -10,7 +10,7 @@ module.exports = {
 
         return res.status(resultPrint.status_code).json(resultPrint)
     },
-
+///// AUTH //////////////////////////////////////////////////////////////////
     generateSalt: (length) => {
         return crypto.randomBytes(Math.ceil(length / 2)).toString('hex').slice(0, length)
     },
@@ -24,6 +24,7 @@ module.exports = {
             passwordHash: value
         }
     },
+/////////////////////////////////////////////////////////////////////////
     responAdd : (res, result, status) => {
         let resp = {}
         resp.status = status
@@ -31,7 +32,7 @@ module.exports = {
         resp.message = 'Data sudah ditambah'
         return res.status(status).json(resp)
     },
-    
+///////////////////////////////////////////////////////////////////////// 
     responUpd: (res, result, status, idnya) => {
         let resp = {}
         let id = idnya
@@ -42,7 +43,7 @@ module.exports = {
         
         return res.status(status).json(resp)
     },
-    
+///////////////////////////////////////////////////////////////////////// 
     responDlt: (res, idnya, status) => {
         let resp = {}
         resp.status = status

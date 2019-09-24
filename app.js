@@ -9,7 +9,7 @@ const logger = require('morgan')
 const port = process.env.PORT || 5000
 
 const postRoute = require('./src/routes/postingan')
-const noteRoute = require('./src/routes/user')
+const authRoute = require('./src/routes/user')
 
 
 app.listen(port, () => {
@@ -29,4 +29,4 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //router
 
 app.use('/postingan', postRoute)
-app.use('/note', noteRoute)
+app.use('/auth', authRoute)
